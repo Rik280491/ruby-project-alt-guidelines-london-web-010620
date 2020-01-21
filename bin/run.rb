@@ -1,3 +1,9 @@
 require_relative '../config/environment'
 
-puts "Welcome to PrimeFlix!"
+cli = CommandLineInterface.new
+cli.greet
+cli.name 
+cli.subscribe 
+
+
+
