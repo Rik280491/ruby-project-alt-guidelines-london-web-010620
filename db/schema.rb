@@ -10,20 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_21_095012) do
+ActiveRecord::Schema.define(version: 2020_01_21_154700) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "streaming_services", force: :cascade do |t|
+  create_table "services", force: :cascade do |t|
     t.string "name"
-    t.string "category"
+    t.integer "category_id"
+    t.float "annual_price"
+    t.float "monthly_price"
   end
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer "customer_id"
-    t.integer "streaming_service_id"
+    t.integer "service_id"
+    t.boolean "annual"
   end
 
 end
