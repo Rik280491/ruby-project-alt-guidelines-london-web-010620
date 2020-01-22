@@ -25,15 +25,39 @@ class CommandLineInterface
         puts "Would you be paying annually? Yes or No"
         ans_annual = gets.chomp   
         if ans_annual == "Yes"
-            @new_subscription = Subscription.find_or_create_by(customer_id: @new_customer.id, service_id: ans_sub.id, annual: true)
+            @new_subscription = Subscription.find_or_create_by(
+                customer_id: @new_customer.id,
+                service_id: ans_sub.id,
+                annual: true
+            )
         else 
-            @new_subscription = Subscription.find_or_create_by(customer_id: @new_customer.id, service_id: ans_sub.id, annual: false)
+            @new_subscription = Subscription.find_or_create_by(
+                customer_id: @new_customer.id,
+                service_id: ans_sub.id,
+                annual: false
+            )
         end 
     end 
 
 
+    #2 --- As a user, I want to find out the monthly and annual cost for my subscription(s)
 
-    #4 --- Delete service 
+
+    #3 --- As a user, I want to update my subscriptions 
+    
+
+
+
+
+
+    
+
+
+
+
+
+
+    #4 --- As a user, I want to be able to delete my subscription  
     def delete 
         services = Service.all.map {|service| service.name}.uniq
         puts services 
