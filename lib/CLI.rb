@@ -3,16 +3,18 @@ class CommandLineInterface
     def greet 
         puts "Are you looking to subscribe to our services and unable to budget responsibly? Step right in!"
     end 
+
     
     
-    def name 
+     def name 
         puts "Please enter your name:"
-        ans_name = gets.chomp
-        @new_customer = Customer.find_or_create_by(name: ans_name)
-    end 
+        @ans_name = gets.chomp
+        @new_customer = Customer.find_or_create_by(name: @ans_name)
+     end 
     
     #1, 2, 3, 4 List the four user stories 
-    #As a user I want to be able to subscribe to a service 
+    
+    #1 --- As a user I want to be able to subscribe to a service 
     def subscribe 
         puts "Fancy subscribing to one of the plethora of services we have to offer?"
         services = Service.all.map {|service| service.name}.uniq
@@ -31,19 +33,16 @@ class CommandLineInterface
 
 
 
-    #4 -- Delete service 
+    #4 --- Delete service 
     def delete 
         services = Service.all.map {|service| service.name}.uniq
+        puts services 
         puts "Please enter the name of the service you would like to unsubscribe from:"
         ans_delete = gets.chomp 
-        ans_del = Service.find_by(name: ans_delete)
-        ans_del.destroy()
-
-
-        
-
-
-
+        ans_delete_service = Service.find_by(name: ans_delete)
+        c_name = Customer.find_by(name: @ans_name)
+        ans_del = Subscription.find_by(customer_id: c_name.id, service_id: ans_delete_service.id)
+        ans_del.destroy
     end 
 end 
         
