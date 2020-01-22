@@ -4,6 +4,7 @@ cli = CommandLineInterface.new
 cli.greet
 cli.name 
 cli.subscribe 
+cli.delete 
 
 
 
