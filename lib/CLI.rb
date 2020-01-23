@@ -41,24 +41,21 @@ class CommandLineInterface
 
     
     #2 --- As a user, I want to find out the monthly and annual cost for my subscription(s)
-        # def total_cost 
-        #     puts "Would you like to find out your total annual cost for the services you have subscribed to. This service is provided free of charge!"
-        #     ans = gets.chomp 
-        #     if ans == "Yes" || ans == "yes"
-        #         total_sub_cost = 0 
-        #         cust = Customer.find(@new_customer.id)
-        #         annual_subs = cust.subscriptions.select{|s| s.annual == true }
-        #         monthly_subs = cust.subscriptions.select{|s| s.annual == false}
-        #         if cust.subscriptions.annual == true 
-        #             total_sub_cost += annual_subs.map{ |s| s.service.annual_price}.sum 
-        #         else 
-        #             total_sub_cost += monthly_subs.map{ |s| s.service.monthly_price}.sum 
-        #         end 
-        #     end 
-        # end
-        # puts "The total annual cost for your subscriptions is #{total_sub_cost}"  
-        # end         
+        def total_cost 
+            puts "Would you like to find out your total annual cost for the services you have subscribed to. This service is provided free of charge!"
+            ans = gets.chomp 
+            if ans == "Yes" || ans == "yes"
+                total_sub_cost = 0 
+                cust = Customer.find(@new_customer.id)
+                annual_subs = cust.subscriptions.select{|s| s.annual == true }
+                monthly_subs = cust.subscriptions.select{|s| s.annual == false}
+                total_sub_cost += annual_subs.map{ |s| s.service.annual_price}.sum 
+                total_sub_cost += monthly_subs.map{ |s| s.service.monthly_price * 12}.sum 
+            end 
+        puts "The total annual cost for your subscriptions is #{total_sub_cost}"  
+        end 
 
+        
                 
             
 
@@ -72,7 +69,7 @@ class CommandLineInterface
 
         
 
-    #3 --- As a user, I want to update my subscription from annual to monthly 
+    #3 --- As a user, I want to update my subscription from annual to monthly, or vice versa  
     def update 
         puts "Would you like to change you subscription payments from monthly to annual, or vice versa?"
         ans = gets.chomp 
@@ -96,7 +93,8 @@ class CommandLineInterface
        ans_del = Subscription.find_by(customer_id: @new_customer.id, service_id: ans_delete_service.id)
        ans_del.destroy
        end
-    end  
+    end 
+
         
      
 
