@@ -5,7 +5,7 @@ cli.greet
 cli.name 
 #cli.subscribe
 #cli.total_cost  
-#cli.delete 
-cli.update 
+cli.delete 
+#cli.update 
 
 
