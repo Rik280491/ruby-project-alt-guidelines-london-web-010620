@@ -5,7 +5,6 @@ class CommandLineInterface
         puts "Are you looking to subscribe to our services and unable to budget responsibly? Step right in!"
         puts "---------------------------------------------------------------------------------------------"
     end 
-
     
     
     def name 
@@ -17,6 +16,32 @@ class CommandLineInterface
     end 
     
     #1, 2, 3, 4 List the four user stories 
+    def menu 
+        puts "
+              1. Subscribe to a service
+              2. Find out the total annual cost of your subscriptions
+              3. Update your subscription
+              4. Unsubscribe"
+        
+        puts "---------------------------------------------------------------"
+        puts "Please select from one of the following options. Enter a number"
+        puts "---------------------------------------------------------------"
+        input = gets.chomp.to_i
+        case input
+          when 1
+            subscribe 
+            menu
+          when 2 
+            total_cost
+            menu
+          when 3 
+            update 
+            menu
+          when 4 
+            delete
+            menu 
+        end 
+    end 
     
     #1 --- As a user I want to be able to subscribe to a service 
     def subscribe 
@@ -50,7 +75,7 @@ class CommandLineInterface
     end 
 
     
-    #2 --- As a user, I want to find out the monthly and annual cost for my subscription(s)
+    #2 --- As a user, I want to find out the annual cost for my subscription(s)
     def total_cost 
         puts "-----------------------------------------------------------------------------------------------------------------------------------"
         puts "Would you like to find out your total annual cost for the services you have subscribed to? This service is provided free of charge!"
