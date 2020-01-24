@@ -42,7 +42,7 @@ class CommandLineInterface
     
     #2 --- As a user, I want to find out the monthly and annual cost for my subscription(s)
         def total_cost 
-            puts "Would you like to find out your total annual cost for the services you have subscribed to. This service is provided free of charge!"
+            puts "Would you like to find out your total annual cost for the services you have subscribed to? This service is provided free of charge!"
             ans = gets.chomp 
             if ans == "Yes" || ans == "yes"
                 total_sub_cost = 0 
@@ -52,7 +52,7 @@ class CommandLineInterface
                 total_sub_cost += annual_subs.map{ |s| s.service.annual_price}.sum 
                 total_sub_cost += monthly_subs.map{ |s| s.service.monthly_price * 12}.sum 
             end 
-        puts "The total annual cost for your subscriptions is #{total_sub_cost}"  
+        puts "The total annual cost for your subscriptions is £#{total_sub_cost}"  
         end 
 
         
@@ -79,7 +79,7 @@ class CommandLineInterface
         else ans == "Yes" && up_sub.annual == true 
             up_sub.update(annual: false)
         end 
-            
+        puts "Your subscription has been been updated!" 
     end 
                 
                 
@@ -91,9 +91,14 @@ class CommandLineInterface
        ans_delete = gets.chomp 
        ans_delete_service = Service.find_by(name: ans_delete)
        ans_del = Subscription.find_by(customer_id: @new_customer.id, service_id: ans_delete_service.id)
-       ans_del.destroy
-       end
-    end 
+       if ans_del.nil?
+          puts "You are not subscribed to this service!"
+       else 
+          ans_del.destroy
+          puts "You have successfully unsubscribed!"
+       end 
+    end
+end 
 
         
      
